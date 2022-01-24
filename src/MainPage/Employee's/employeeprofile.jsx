@@ -25,7 +25,7 @@ const EmployeeProfile = () => {
   }, [])
 
   const ff = async () => {
-    let data = await getEmpData()
+    let data = await getData()
     setUserInfo(data)
   }
 
@@ -54,8 +54,30 @@ const EmployeeProfile = () => {
 
   }
 
+  //removing device
+  const removeDevice = async (x) => {
+    console.log(x.id)
+    let data = {
+      "id": x.id
+    }
+    try {
+      startLoading()
+      let res = await axios.delete(`http://localhost:8000/devices/${x.id}`, data
+      )
+      console.log(res)
+      stopLoading()
+      successToast("Deleted Successfully")
+      return res
 
-  const getEmpData = async () => {
+    } catch (error) {
+      startLoading()
+      errorToast("Could not Delete")
+      stopLoading()
+      return error;
+    }
+  }
+
+  const getData = async () => {
     try {
       let res = await axios.get(`http://localhost:8000/devices`,
       )
@@ -179,7 +201,7 @@ const EmployeeProfile = () => {
                                 className="dropdown-item"
                                 data-toggle="modal"
                                 data-target="#delete_shift"
-                                onClick={() => openDelate(record)}
+                                onClick={() => removeDevice(x)}
                               >
                                 <i className="fa fa-trash-o m-r-5" /> Remove Device
                               </a>
@@ -187,7 +209,7 @@ const EmployeeProfile = () => {
                                 className="dropdown-item"
                                 data-toggle="modal"
                                 data-target="#delete_shift"
-                                onClick={() => openDelate(record)}
+                                onClick={() => removeDeviddce(x)}
                               >
                                 <i className="fa fa-pencil m-r-5" /> Edit Device
                               </a>

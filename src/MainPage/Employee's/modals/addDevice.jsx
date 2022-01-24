@@ -52,6 +52,7 @@ const AddDevice = ({ }) => {
 
   useEffect(() => {
     setValue("ip");
+    setValue("8080");
     setValue("name");
     setValue("description");
   }, []);
@@ -77,10 +78,9 @@ const AddDevice = ({ }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="row" id="modal1">
-        <div className="col-sm-12">
+        <div className="col-sm-6">
           <div className="form-group">
             <label className="col-form-label">Device IP <span className="text-danger">*</span></label>
-            {/* <input className="form-control" type="text" /> */}
             <input
               className="form-control"
               type="text"
@@ -91,6 +91,27 @@ const AddDevice = ({ }) => {
                   // setStart(e.target.value);
                   if (e) setValue("ip", e.target.value);
                   else setValue("ip", null);
+                },
+              })}
+            />
+            {errors.ip && <span style={{ color: "red", fontSize: "small" }}>is required</span>}
+
+          </div>
+        </div>
+        <div className="col-sm-6">
+          <div className="form-group">
+            <label className="col-form-label">Port <span className="text-danger">*</span></label>
+            <input
+              className="form-control"
+              type="number"
+              {...register("port", {
+                required: true,
+                defaultValue: 8080,
+                onChange: (e) => {
+                  e.persist();
+                  // setStart(e.target.value);
+                  if (e) setValue("port", e.target.value);
+                  else setValue("port", null);
                 },
               })}
             />
