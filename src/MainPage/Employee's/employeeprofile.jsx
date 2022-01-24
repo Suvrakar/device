@@ -5,16 +5,19 @@ import { useReactOidc } from '@axa-fr/react-oidc-context';
 import { useHistory, useParams } from 'react-router';
 import axios from "axios";
 import Skeleton from 'react-loading-skeleton';
+import AddEmployeemodal from './modals/addDevice';
+import AddDevice from './modals/addDevice';
+import { useToastify } from '../../Contexts/ToastContext';
+
 
 
 const EmployeeProfile = () => {
-  // arr = [1,2,3,4,5]
 
-  let history = useHistory();
+  const { startLoading, stopLoading, successToast, errorToast } =
+    useToastify();
   const { id } = useParams()
   const { oidcUser } = useReactOidc();
   const [userInfo, setUserInfo] = useState({})
-  // const userInfo=oidcUser.profile
 
   useEffect(() => {
     ff()
@@ -24,23 +27,37 @@ const EmployeeProfile = () => {
   const ff = async () => {
     let data = await getEmpData()
     setUserInfo(data)
-    // setInterval(() => {
-    //   console.log(userInfo, "nfdsndfjsdjk")  
-    // }, 2000);
+  }
+
+  //pinging the specific ip
+  const pingIP = async (x) => {
+    console.log(x.ip, x.port)
+    let data = {
+      "ip": x.ip,
+      "port": x.port
+    }
+    try {
+      startLoading()
+      let res = await axios.post(`http://localhost:8000/devices/ping`, data
+      )
+      console.log(res)
+      stopLoading()
+      successToast("Ping Successfully")
+      return res
+
+    } catch (error) {
+      startLoading()
+      errorToast("Could not Connect")
+      stopLoading()
+      return error;
+    }
 
   }
 
 
   const getEmpData = async () => {
     try {
-      let res = await axios.get(`http://192.168.50.251:8000/devices`,
-        // {
-
-        //   headers: {
-        //     'Authorization': `Bearer ${oidcUser.access_token}`
-        //   }
-
-        // }
+      let res = await axios.get(`http://localhost:8000/devices`,
       )
 
       return res.data
@@ -52,12 +69,26 @@ const EmployeeProfile = () => {
   }
 
   try {
-    console.log(userInfo[0].name, "fnsjdfnjsdnsdjknfsjksdnf")
+    console.log(userInfo[0].name)
   }
   catch (ree) {
     console.log("err")
   }
 
+
+
+  const closeEdit = () => {
+    $("#edit_leave").modal("hide");
+    $("#add_leave").modal("hide");
+    setValue("no_of_days", 0);
+    setValue("leave_type", "");
+    setValue("date_from", "");
+    setValue("date_to", "");
+    setStart(null);
+    setEnd(null);
+    setValue("reason", "");
+    setItemId("");
+  };
 
 
   return (
@@ -73,16 +104,29 @@ const EmployeeProfile = () => {
         <div className="page-header">
           <div className="row">
             <div className="col-sm-12">
-              <h3 className="page-title">{`Avaiable Devices`}</h3>
+              <h3 className="page-title">{`Available Devices`}</h3>
             </div>
             <div className="col-auto float-right ml-auto">
               <a href="#" className="btn add-btn" data-toggle="modal" data-target="#add_employee"><i className="fa fa-plus" /> Add Device</a>
+              <div id="add_employee" className="modal custom-modal fade" role="dialog">
+                <div className="modal-dialog modal-dialog-centered modal-lg">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title">Add Device</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      <AddDevice />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
-        {/* /Page Header */}
-
-
 
         {/* {userInfo.map((x)=>  */}
         <div className="tab-content">
@@ -97,7 +141,7 @@ const EmployeeProfile = () => {
                     <div className="card profile-box flex-fill">
                       <div className="card-body">
                         <div className="d-flex justify-content-between">
-                          <h3 className="card-title">Device No {x.id}</h3>
+                          <h3 className="card-title">[Device {x.id}] - {x.name}</h3>
                           <div className="dropdown dropdown-action">
                             <a
                               className="action-icon dropdown-toggle"
@@ -111,7 +155,7 @@ const EmployeeProfile = () => {
                                 className="dropdown-item"
                                 data-toggle="modal"
                                 data-target="#edit_shift"
-                                onClick={() => openEdit(record)}
+                                onClick={() => pingIP(x)}
                               >
                                 <i className="fa fa-pencil m-r-5" /> Test Device
                               </a>
@@ -166,11 +210,11 @@ const EmployeeProfile = () => {
                           </li>
                           <li>
                             <div className="title">Network Connection:</div>
-                            <div className="text">{x.name ||  <Skeleton width={250} />}</div>
+                            <div className="text">{x.port || <Skeleton width={250} />}</div>
                           </li>
                           <li>
                             <div className="title">Backend Connection:</div>
-                            <div className="text">{x.name ||  <Skeleton width={250} />}</div>
+                            <div className="text">{x.description || <Skeleton width={250} />}</div>
                           </li>
 
                         </ul>
