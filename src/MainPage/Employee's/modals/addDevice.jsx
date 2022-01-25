@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useForm, Controller } from "react-hook-form";
 import { useToastify } from '../../../Contexts/ToastContext';
-
+import $ from "jquery";
 const axios = require('axios');
 import tick from "../../../assets/img/tick.png"
 import x from "../../../assets/img/x.png"
 
-const AddDevice = ({ }) => {
+const AddDevice = ({submitFunc }) => {
   const { startLoading, stopLoading, successToast, errorToast } =
     useToastify();
 
@@ -31,13 +31,7 @@ const AddDevice = ({ }) => {
     }
   }
 
-  const closeEdit = () => {
-    $("#modal1").modal("hide");
-    setValue("ip", "");
-    setValue("name", "");
-    setValue("description", "");
-    // setstate("")
-  };
+ 
 
 
   const {
@@ -52,7 +46,7 @@ const AddDevice = ({ }) => {
 
   useEffect(() => {
     setValue("ip");
-    setValue("8080");
+    setValue("port");
     setValue("name");
     setValue("description");
   }, []);
@@ -60,16 +54,8 @@ const AddDevice = ({ }) => {
 
 
   const onSubmit = async (data) => {
-    try {
-      let res = await axios.post(`http://localhost:8000/devices`, data, {
-      });
-      successToast("Device Added")
-      closeEdit()
-      return res
-    } catch (error) {
-      errorToast("Error")
-      return { error }
-    }
+    submitFunc(data);
+   
     // console.log(data)
   };
 
@@ -77,7 +63,7 @@ const AddDevice = ({ }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="row" id="modal1">
+      <div className="row" >
         <div className="col-sm-6">
           <div className="form-group">
             <label className="col-form-label">Device IP <span className="text-danger">*</span></label>

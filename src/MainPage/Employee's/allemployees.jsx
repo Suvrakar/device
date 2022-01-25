@@ -23,7 +23,6 @@ import {
   getEmployeeList,
   searchEmployee,
 } from "../../Services/dashBoardServices";
-import AddEmployeemodal from "./modals/addEmployeemodal";
 import { useToastify } from "../../Contexts/ToastContext";
 import { chcekPermission } from "../../Services/Helper";
 
