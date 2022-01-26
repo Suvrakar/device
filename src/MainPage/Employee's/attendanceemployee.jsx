@@ -2,12 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { getCurrentMonthtats, getMothSpecificUserTimeSheet } from '../../Services/dashBoardServices';
-import Punchcard from './components/Punchcard';
 import { useReactOidc } from '@axa-fr/react-oidc-context';
 import { Table } from 'antd';
 import 'antd/dist/antd.css';
 import Select from 'react-select';
-import AttendancestatCard from './components/attendancestatCard';
 import { makeMonthStats, makeMonthStatsDataFormater } from '../../Services/Helper';
 import { useToastify } from '../../Contexts/ToastContext';
 import ReactExport from '@ibrahimrahmani/react-export-excel';
@@ -197,7 +195,6 @@ const Attendance = () => {
                 </div>
               </section>
               <section>
-                <AttendancestatCard data={statData} />
               </section>
             </div>
           </div>

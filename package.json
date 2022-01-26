@@ -61,6 +61,7 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.17.4",
     "react-hook-form-input": "^1.1.10",
+    "react-hooks-sse": "^2.0.0",
     "react-input-mask": "^2.0.4",
     "react-loading-skeleton": "^2.2.0",
     "react-owl-carousel": "^2.3.1",

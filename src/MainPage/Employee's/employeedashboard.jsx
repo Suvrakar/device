@@ -4,12 +4,8 @@ import { Helmet } from "react-helmet";
 import dateFormat from "dateformat";
 import { Avatar_02, Avatar_04, Avatar_05, Avatar_07, Avatar_08, Avatar_09 } from '../../Entryfile/imagepath.jsx'
 import { useReactOidc } from '@axa-fr/react-oidc-context';
-import Punchcard from './components/Punchcard.jsx';
-import { Link } from 'react-router-dom';
-import messages from "../../message"
 import { useToastify } from "../../Contexts/ToastContext";
 import { getLeavesToApproveCountforEmp, getLeaveTypeCount } from '../../Services/dashBoardServices.js';
-import Notifications from './components/notifications.jsx';
 
 const EmployeeDashboard = () => {
   const { startLoading, stopLoading, successToast, errorToast } =
@@ -87,7 +83,6 @@ const EmployeeDashboard = () => {
         </div>
         <div className="row">
           <div className="col-md-6">
-            <Punchcard />
 
           </div>
           <div className="col-md-6">

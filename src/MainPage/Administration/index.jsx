@@ -21,13 +21,6 @@ const LazyActivities = lazy(() => import('./activities'))
 const Uiinterfaceroute = ({ match }) => (
    <Suspense fallback={<LoaderPage/>}>
     <Switch>
-        <Redirect exact from={`${match.url}/`} to={`${match.url}/notifications`} />
-        <Route path={`${match.url}/notifications`} >
-            <OidcSecure>
-               <LazyActivities />
-            </OidcSecure>
-         </Route>
-        {/* <Route path={`${match.url}/users`} component={Users} /> */}
         {/* <Route path={`${match.url}/assets`} component={Assets} />
         <Route path={`${match.url}/knowledgebase`} component={knowledgebase} />
         <Route path={`${match.url}/knowledgebase-view`} component={knowledgebaseview} />

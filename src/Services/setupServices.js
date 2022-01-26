@@ -1,22 +1,5 @@
 import axios from "axios";
 
-export const getPunchcardInfo1 = async (token) => {
-
-
-    try {
-        let res = await axios.get('https://timesheet.hivecorelimited.com/attendance/timesheetstatus/',
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-
-            })
-        return res.data
-    } catch (error) {
-        return { error }
-    }
-
-}
 
 export const getHolidayData = async (token, year) => {
     try {

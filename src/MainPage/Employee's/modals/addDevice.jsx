@@ -56,8 +56,6 @@ const AddDevice = ({ submitFunc }) => {
 
   const onSubmit = async (data) => {
     submitFunc(data);
-
-    // console.log(data)
   };
 
 
@@ -162,7 +160,7 @@ const AddDevice = ({ submitFunc }) => {
           </div>
         </div>
       </div>
-    
+
       <div className="submit-section">
         <button className="btn btn-primary submit-btn" type="submit">Submit</button>
       </div>

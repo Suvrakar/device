@@ -5,7 +5,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import { Helmet } from "react-helmet";
 import { Avatar_01, Avatar_16, Avatar_08, Avatar_13, Avatar_05 } from "../../Entryfile/imagepath"
-import { getNotification } from '../../Services/graphqlServices';
 import { notification_Mapper } from '../../Services/Helper';
 import { useReactOidc } from '@axa-fr/react-oidc-context';
 

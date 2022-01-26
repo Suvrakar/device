@@ -28,22 +28,6 @@ import { useToastify } from "../../Contexts/ToastContext";
 import { chcekPermission } from "../../Services/Helper";
 
 const Devices = () => {
-
-
-  const closeEdit = () => {
-    $("#add_employee").modal("hide");
-    $("#add_employee").modal("hide");
-    setValue("name", "");
-    setValue("from_time", "");
-    setValue("to_time", "");
-    setValue("buffer_time", "");
-    setValue("work_days", "");
-    setValue("day_of_the_week", "");
-    setValue("is_active", false);
-    setValue("is_default", false);
-    setItemId("");
-  };
-
   const { showToast, startLoading, stopLoading, successToast, errorToast } =
     useToastify();
 
@@ -120,7 +104,7 @@ const Devices = () => {
       Object.entries(searchFilter).filter(([_, v]) => v != "")
     );
     let res = await searchEmployee(obj, oidcUser.access_token);
-    if (!!!res.error) {
+    if (!res.error) {
       setrendempList(res);
     } else {
       showToast("error", res.error.message);
@@ -143,7 +127,8 @@ const Devices = () => {
               <h3 className="page-title">Employees</h3>
             </div>
             {adminPermission ? <div className="col-auto float-right ml-auto">
-              <a className="btn add-btn" data-toggle="modal" data-target="#add_employee"><i className="fa fa-plus" /> Add Employee</a>
+              <a className="btn add-btn" data-toggle="modal" data-target="#add_employee"><i className="fa fa-plus" /> 
+              Employee</a>
               <div className="view-icons">
                 <a href="/hive_hrm/app/employee/allemployees" className="grid-view btn btn-link active"><i className="fa fa-th" /></a>
                 <a href="/hive_hrm/app/employee/employees-list" className="list-view btn btn-link"><i className="fa fa-bars" /></a>

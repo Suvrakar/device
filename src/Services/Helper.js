@@ -237,7 +237,6 @@ export const notification_Mapper = (data) => {
     default:
       return {
         msg: ``,
-        link: `/hive_hrm/app/general/notifications`,
         time: time
       }
       break;

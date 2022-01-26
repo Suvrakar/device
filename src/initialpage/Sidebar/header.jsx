@@ -9,8 +9,7 @@ import {
 } from '../../Entryfile/imagepath'
 import { useReactOidc } from '@axa-fr/react-oidc-context';
 import { chcekPermission } from '../../Services/Helper';
-import { getNotification } from '../../Services/graphqlServices';
-import NotificationPure from './NotificationPure';
+
 
 
 
@@ -23,44 +22,12 @@ const Header = () => {
   const [list, setList] = useState([])
   const [count, setCount] = useState(0);
 
-  const getNoti = async () => {
-    let body = {
-      query: `query {
-        notifications{
-          id
-          type
-          isRead
-          created
-        }
-      }
-                
-              `
-    }
-    let p = await getNotification(oidcUser.access_token, body);
-    if (!p.error) {
-      let pp=p.data.notifications.filter(x=>!x.isRead);
-      let c = [...pp]
-      setList(c)
-      setCount(pp.length || 0)
-    }
-    else {
-      console.log(p);
-    }
-  }
-
-  const getNotiList = () => {
-    setInterval(() => {
-      getNoti()
-    }, 3000);
-  }
 
 
   useEffect(() => {
     if (oidcUser) {
-      getNoti()
       setName(oidcUser.profile.first_name)
       setPhoto(oidcUser.profile.photo)
-      getNotiList()
       setsetupPermission(chcekPermission(oidcUser.profile.permissions, 'setup'))
     }
   }, [oidcUser])

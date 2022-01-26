@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
-import { useReactOidc } from '@axa-fr/react-oidc-context';
-import { useHistory, useParams } from 'react-router';
 import axios from "axios";
 import Skeleton from 'react-loading-skeleton';
 import AddDevice from './modals/addDevice';
 import { useToastify } from '../../Contexts/ToastContext';
 import { useForm, Controller } from "react-hook-form";
 import $ from "jquery";
-
+import SSE from "./modals/SSE"
 
 
 const EmployeeProfile = () => {
@@ -32,8 +30,6 @@ const EmployeeProfile = () => {
     return () => { }
   }, [])
 
-  const onSubmit=()=>{}
-  
 
   const ff = async () => {
     setValue("ip");
@@ -45,7 +41,31 @@ const EmployeeProfile = () => {
   }
 
 
- 
+  //Update api
+  const onSubmit = async (data) => {
+    console.log(data);
+    startLoading()
+    try {
+      const payload =
+      {
+        "name": data.name,
+        "description": data.description
+      };
+      stopLoading()
+      successToast("Edited Successfully")
+      console.log(payload)
+      let res = await axios.put(`http://localhost:8000/devices/${data.id}`, payload)
+      ff()
+      closeEdit()
+      console.log(res)
+    }
+    catch (err) {
+      startLoading()
+      errorToast("Could not Edit")
+      stopLoading()
+    }
+
+  }
 
   //pinging the specific ip
   const pingIP = async (x) => {
@@ -83,7 +103,6 @@ const EmployeeProfile = () => {
       startLoading()
       let res = await axios.delete(`http://localhost:8000/devices/${x.id}`, data
       )
-      console.log(res)
       ff()
       stopLoading()
 
@@ -98,6 +117,7 @@ const EmployeeProfile = () => {
     }
   }
 
+  //getting all the cards data
   const getData = async () => {
     try {
       let res = await axios.get(`http://localhost:8000/devices`,
@@ -110,29 +130,23 @@ const EmployeeProfile = () => {
 
   }
 
-  try {
-    // console.log(userInfo[0].name)
-  }
-  catch (err) {
-    // console.log("err")
-  }
-
 
 
   const editOpen = (x) => {
+    setValue("id", x.id)
     setValue("ip", x.ip);
     setValue("port", x.port);
     setValue("name", x.name);
     setValue("description", x.description);
   };
-  const closeEdit = () => {
-    console.log("jjjjjjjjjjjjjjj");
-    $("#add_employee").modal("hide");
 
-    // setstate("")
+
+  const closeEdit = () => {
+    $("#add_employee").modal("hide");
+    $("#edit_shift").modal("hide");
   };
 
-  const addFunction = async(data) => {
+  const addFunction = async (data) => {
     try {
       let res = await axios.post(`http://localhost:8000/devices`, data, {
       });
@@ -140,7 +154,8 @@ const EmployeeProfile = () => {
       ff()
       closeEdit()
     } catch (error) {
-      errorToast("Error")
+      console.log(error.response.data)
+      errorToast(JSON.stringify(error.response.data))
       return { error }
     }
   }
@@ -151,6 +166,7 @@ const EmployeeProfile = () => {
         <title>{`Devices Profile - Hive HRMS`}</title>
         <meta name="description" content="Reactify Blank Page" />
       </Helmet>
+
       {/* {console.log(employeeProfile)} */}
       {/* Page Content */}
       <div className="content container-fluid">
@@ -168,7 +184,7 @@ const EmployeeProfile = () => {
                     <div className="modal-header">
                       <h5 className="modal-title">Add Device</h5>
                       <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" onClick={()=>closeEdit}>×</span>
+                        <span aria-hidden="true" onClick={() => closeEdit}>×</span>
                       </button>
                     </div>
                     <div className="modal-body" id="modal11">
@@ -278,6 +294,9 @@ const EmployeeProfile = () => {
           </div>
         </div>
       </div>
+
+
+      {/* edit modal  */}
       <div id="edit_shift" className="modal custom-modal fade" role="dialog">
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content">
@@ -319,6 +338,7 @@ const EmployeeProfile = () => {
                         type="number"
                         {...register("port", {
                           required: true,
+
                           disabled: true,
                           onChange: (e) => {
                             e.persist();
@@ -388,7 +408,6 @@ const EmployeeProfile = () => {
         </div>
 
       </div>
-
 
     </div>
 
