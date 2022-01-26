@@ -15,8 +15,6 @@ const EmployeeProfile = () => {
 
   const { startLoading, stopLoading, successToast, errorToast } =
     useToastify();
-  const { id } = useParams()
-  const { oidcUser } = useReactOidc();
   const [userInfo, setUserInfo] = useState({})
 
   const {
@@ -56,18 +54,19 @@ const EmployeeProfile = () => {
       "ip": x.ip,
       "port": x.port
     }
+    let p = (x.name).toUpperCase();
     try {
       startLoading()
       let res = await axios.post(`http://localhost:8000/devices/ping`, data
       )
       console.log(res)
       stopLoading()
-      successToast("Ping Successfully")
+      successToast(`${(p)} - Ping Successfully `)
       return res
 
     } catch (error) {
       startLoading()
-      errorToast("Could not Connect")
+      errorToast(`${(p)} - Could not Connect`)
       stopLoading()
       return error;
     }
@@ -112,10 +111,10 @@ const EmployeeProfile = () => {
   }
 
   try {
-    console.log(userInfo[0].name)
+    // console.log(userInfo[0].name)
   }
-  catch (ree) {
-    console.log("err")
+  catch (err) {
+    // console.log("err")
   }
 
 
@@ -299,6 +298,7 @@ const EmployeeProfile = () => {
                         type="text"
                         {...register("ip", {
                           required: true,
+                          disabled: true,
                           onChange: (e) => {
                             e.persist();
                             // setStart(e.target.value);
@@ -319,7 +319,7 @@ const EmployeeProfile = () => {
                         type="number"
                         {...register("port", {
                           required: true,
-                          defaultValue: 8080,
+                          disabled: true,
                           onChange: (e) => {
                             e.persist();
                             // setStart(e.target.value);

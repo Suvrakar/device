@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useWatch } from "react-hook-form";
 import { useToastify } from '../../../Contexts/ToastContext';
 import $ from "jquery";
 const axios = require('axios');
 import tick from "../../../assets/img/tick.png"
 import x from "../../../assets/img/x.png"
 
-const AddDevice = ({submitFunc }) => {
+const AddDevice = ({ submitFunc }) => {
   const { startLoading, stopLoading, successToast, errorToast } =
     useToastify();
+
 
   const [state, setstate] = useState();
 
@@ -31,7 +32,7 @@ const AddDevice = ({submitFunc }) => {
     }
   }
 
- 
+
 
 
   const {
@@ -46,7 +47,7 @@ const AddDevice = ({submitFunc }) => {
 
   useEffect(() => {
     setValue("ip");
-    setValue("port");
+    setValue("port", "4370");
     setValue("name");
     setValue("description");
   }, []);
@@ -55,11 +56,10 @@ const AddDevice = ({submitFunc }) => {
 
   const onSubmit = async (data) => {
     submitFunc(data);
-   
+
     // console.log(data)
   };
 
-  // const onSubmit = data => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -92,7 +92,7 @@ const AddDevice = ({submitFunc }) => {
               type="number"
               {...register("port", {
                 required: true,
-                defaultValue: 8080,
+                defaultValue: "4370",
                 onChange: (e) => {
                   e.persist();
                   // setStart(e.target.value);
@@ -162,13 +162,15 @@ const AddDevice = ({submitFunc }) => {
           </div>
         </div>
       </div>
-
+    
       <div className="submit-section">
         <button className="btn btn-primary submit-btn" type="submit">Submit</button>
       </div>
+
+
     </form>
 
   )
 }
 
-export default AddDevice
+export default AddDevice;

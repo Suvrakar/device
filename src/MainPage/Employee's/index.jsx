@@ -4,7 +4,7 @@ import { withOidcSecure, OidcSecure } from '@axa-fr/react-oidc-context';
 import LoaderPage from '../loader';
 
 const LazyAllEmployees = lazy(() => import('./allemployees'))
-const LazyLeaveEmployee = lazy(() => import('./leaveemployee'))
+// const LazyLeaveEmployee = lazy(() => import('./leaveemployee'))
 const LazyAttendanceEmployee = lazy(() => import('./attendanceemployee'))
 const LazyEmployeeDashboard = lazy(() => import('./employeedashboard'))
 const LazyEmployeeProfile = lazy(() => import('./employeeprofile'))
@@ -27,7 +27,7 @@ const EmployeesRoute1 = ({ match }) => (
          </Route>
          <Route path={`${match.url}/leaves-employee`} >
             <OidcSecure>
-               <LazyLeaveEmployee />
+               {/* <LazyLeaveEmployee /> */}
             </OidcSecure>
          </Route>
          <Route path={`${match.url}/attendance-employee/:id?`} >

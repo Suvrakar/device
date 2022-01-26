@@ -32,15 +32,7 @@ const Employee = () => {
   const closeEdit = () => {
     $("#add_employee").modal("hide");
     $("#add_employee").modal("hide");
-    // setValue("name", "");
-    // setValue("from_time", "");
-    // setValue("to_time", "");
-    // setValue("buffer_time", "");
-    // setValue("work_days", "");
-    // setValue("day_of_the_week", "");
-    // setValue("is_active", false);
-    // setValue("is_default", false);
-    // setItemId("");
+
   };
 
   const { showToast, startLoading, stopLoading, successToast, errorToast } =
