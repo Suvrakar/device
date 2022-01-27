@@ -1,12 +1,12 @@
 /**
  * App Routes
  */
-import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import React, { lazy, Component, Suspense } from 'react';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 
-// router service
-import routerService from "../../router_service";
-
+import DeviceProfile from '../../MainPage/Employee\'s/employeeprofile.jsx';
+import SettingPage from '../../MainPage/Employee\'s/settingPage.jsx';
+import LoaderPage from '../../MainPage/loader';
 import Header from './header.jsx';
 import SidebarContent from './sidebar';
 
@@ -15,14 +15,23 @@ class DefaultLayout extends Component {
 		const { match } = this.props;
 		return (
 			<div className="main-wrapper">
-				<Header/>
-				<div>
-					{routerService && routerService.map((route,key)=>{
-						
-						return <Route key={key} path={`${match.url}/${route.path}`} component={route.component} />}
-					)}
-				</div>				
-				<SidebarContent/>
+				<Header />
+				<SidebarContent />
+				{/* <DeviceProfile /> */}
+
+
+				<Suspense fallback={<LoaderPage />}>
+					<Switch>
+						<Redirect exact from={`${match.url}/`} to={`${match.url}/employee-dashboard`} />
+
+						<Route path={`${match.url}/deviceprofile`} >
+							<DeviceProfile />
+						</Route>
+						<Route path={`${match.url}/device/:id`} >
+							<SettingPage />
+						</Route>
+					</Switch>
+				</Suspense>
 			</div>
 		);
 	}

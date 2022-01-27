@@ -20,7 +20,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (oidcUser) {
-      history.push('/app/employees/my-profile')
+      history.push('/app/deviceprofile')
     }
   }, [oidcUser])
 

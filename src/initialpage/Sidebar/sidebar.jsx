@@ -1,6 +1,3 @@
-/**
- * App Header
- */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
@@ -17,7 +14,7 @@ class Sidebar extends Component {
               <li className="menue">
                 <a className="active subdrop"><i className="la la-user" /> <span> Avaiable Devices</span> <span className="menu-arrow" /></a>
                 <ul style={{ display: 'block' }}>
-                  <li><a className={pathname.includes('my-profile') ? "active" : ""} href="/hive_hrm/app/employees/my-profile"> Devices </a></li>
+                  <li><a className={pathname.includes('deviceprofile') ? "active" : ""} href="/app/deviceprofile"> Devices </a></li>
                 </ul>
               </li>
 

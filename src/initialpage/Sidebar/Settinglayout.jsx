@@ -4,8 +4,6 @@
 import React, { useEffect,useState } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 
-// router service
-import settingservice from "../../router_service/settingservice";
 
 import Header from './header';
 import SidebarContent from './settingsidebar';
@@ -32,9 +30,6 @@ const SettingsLayout =(props)=> {
 				<Header/>
 				{setupPermission?
 				<div>
-					{settingservice && settingservice.map((route,key)=>
-						<Route key={key} path={`${match.url}/${route.path}`} component={route.component} />
-					)}
 				</div>:<div style={{display:'flex',justifyContent:'center',height:'100vh',alignItems:'center'}}><h1>Chutiya detected</h1></div>}				
 				{setupPermission?<SidebarContent/>:""}
 			</div>

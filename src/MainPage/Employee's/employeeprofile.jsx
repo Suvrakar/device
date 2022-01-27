@@ -7,6 +7,7 @@ import { useToastify } from '../../Contexts/ToastContext';
 import { useForm, Controller } from "react-hook-form";
 import $ from "jquery";
 import SSE from "./modals/SSE"
+import SettingPage from './settingPage';
 
 
 const EmployeeProfile = () => {
@@ -200,8 +201,11 @@ const EmployeeProfile = () => {
           </div>
         </div>
 
+        {/* <SettingPage/> */}
+
         <div className="tab-content">
           <div id="emp_profile" className="pro-overview tab-pane fade show active">
+
             {userInfo.length ? (
               <div className="row">
                 {userInfo.map((x) =>
@@ -210,6 +214,9 @@ const EmployeeProfile = () => {
                       <div className="card-body">
                         <div className="d-flex justify-content-between">
                           <h3 className="card-title">{(x.name).toUpperCase()}</h3>
+
+                            <span> <button><a href={`/app/device/${x.id}`}>S</a></button> </span>
+
                           <div className="dropdown dropdown-action">
                             <a
                               className="action-icon dropdown-toggle"

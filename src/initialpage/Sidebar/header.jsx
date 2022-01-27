@@ -8,7 +8,7 @@ import {
   Avatar_06, Avatar_08, Avatar_09, Avatar_13, Avatar_17, Avatar_21
 } from '../../Entryfile/imagepath'
 import { useReactOidc } from '@axa-fr/react-oidc-context';
-import { chcekPermission } from '../../Services/Helper';
+
 
 
 
@@ -28,7 +28,6 @@ const Header = () => {
     if (oidcUser) {
       setName(oidcUser.profile.first_name)
       setPhoto(oidcUser.profile.photo)
-      setsetupPermission(chcekPermission(oidcUser.profile.permissions, 'setup'))
     }
   }, [oidcUser])
 
