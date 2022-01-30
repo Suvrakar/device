@@ -53,7 +53,7 @@ export default function SettingPage({ match }) {
             </ul>
         </div>
 
-        <switch>
+        <Switch>
             <Route exact path={`${match.url}/device/:id/`} >
                 <div>
                     Nothing
@@ -72,7 +72,7 @@ export default function SettingPage({ match }) {
                     <Testvoice />
                 </div>
             </Route>
-        </switch>
+        </Switch>
 
 
 

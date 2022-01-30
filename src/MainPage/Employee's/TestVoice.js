@@ -22,9 +22,6 @@ export default function Testvoice() {
     setCount(res.data)
   }
 
-  const fetchUsers = async () => {
-
-  }
 
   const dataSource = [
     {
@@ -79,58 +76,58 @@ export default function Testvoice() {
       "testname": 'Beep bell',
       "action": "13",
     },
-    {
-      "testname": 'Face not emolt',
-      "action": "Test",
-    },
-    {
-      "testname": 'Beep standard',
-      "action": "Test",
-    },
-    {
-      "testname": 'Invalid user',
-      "action": "Test",
-    },
-    {
-      "testname": 'Invalid time period',
-      "action": "Test",
-    },
-    {
-      "testname": ' Invalid combination',
-      "action": "Test",
-    },
-    {
-      "testname": 'Illegal Access',
-      "action": "Test",
-    },
-    {
-      "testname": 'Disk space full',
-      "action": "Test",
-    },
-    {
-      "testname": 'Invalid user',
-      "action": "Test",
-    },
-    {
-      "testname": 'Invalid user',
-      "action": "Test",
-    },
-    {
-      "testname": 'Invalid user',
-      "action": "Test",
-    },
-    {
-      "testname": 'Invalid user',
-      "action": "Test",
-    },
-    {
-      "testname": 'Invalid user',
-      "action": "Test",
-    },
-    {
-      "testname": 'Invalid user',
-      "action": "Test",
-    },
+    // {
+    //   "testname": 'Face not emolt',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Beep standard',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Invalid user',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Invalid time period',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": ' Invalid combination',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Illegal Access',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Disk space full',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Invalid user',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Invalid user',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Invalid user',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Invalid user',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Invalid user',
+    //   "action": "Test",
+    // },
+    // {
+    //   "testname": 'Invalid user',
+    //   "action": "Test",
+    // },
   ];
 
   const columns = [
@@ -146,10 +143,9 @@ export default function Testvoice() {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <i class="fa fa-play" aria-hidden="true"></i>
+          <i className="fa fa-play" aria-hidden="true"></i>
           <a onClick={() => Checkrecord(record)}>Invite</a>
           {/* {console.log(record.action)} */}
-
         </Space>
       )
 
@@ -175,11 +171,11 @@ export default function Testvoice() {
               // bordered
               // dataSource={data}
               dataSource={dataSource}
-              rowKey={(record) => record.id}
+              rowKey={(record) => record.action}
 
             // onChange={this.handleTableChange}
             />
-            <i class="fa fa-play" aria-hidden="true"></i>
+          
           </div>
         </div>
       </div>

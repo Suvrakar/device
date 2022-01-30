@@ -20,15 +20,18 @@ export default function Users() {
         {
             title: "Id",
             dataIndex: "uid",
+            key: "1"
         },
 
         {
             title: "Name",
             dataIndex: "name",
+            key: "2"
         },
         {
             title: "Privilege",
             dataIndex: "privilege",
+            key: "3"
         },
 
     ];
