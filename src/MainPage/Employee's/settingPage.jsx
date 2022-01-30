@@ -8,11 +8,17 @@ import {
     Route,
     useParams, Link
 } from "react-router-dom";
+import Users from "./Users";
+import Logs from "./Logs";
+import Testvoice from "./TestVoice";
 
 
-export default function SettingPage() {
+export default function SettingPage({ match }) {
 
     let { id } = useParams();
+
+    // let {match} = props;
+
 
     return <div className="page-wrapper">
         <Helmet>
@@ -33,7 +39,7 @@ export default function SettingPage() {
             </div>
             {/* Page Content */}
 
-            <ul className="nav nav-tabs px-5">
+            <ul className="nav nav-tabs pr-5">
                 <li className="nav-item">
                     <Link className="nav-link" aria-current="page" to={`/app/device/${id}/users`}> Users </Link>
                 </li>
@@ -45,9 +51,28 @@ export default function SettingPage() {
                 </li>
 
             </ul>
-
-            {/* /Page Content */}
         </div>
+
+        <switch>
+            <Route exact path={`${match.url}/device/:id/`} >
+                <div>
+                    Nothing
+                </div>
+            </Route>
+            <Route exact path={`${match.url}/device/:id/users`} >
+                <Users />
+            </Route>
+            <Route exact path={`${match.url}/device/:id/logs`} >
+                <div>
+                    <Logs />
+                </div>
+            </Route>
+            <Route exact path={`${match.url}/device/:id/test`} >
+                <div>
+                    <Testvoice />
+                </div>
+            </Route>
+        </switch>
 
 
 

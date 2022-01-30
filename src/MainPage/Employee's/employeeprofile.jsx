@@ -214,58 +214,59 @@ const EmployeeProfile = () => {
                       <div className="card-body">
                         <div className="d-flex justify-content-between">
                           <h3 className="card-title">{(x.name).toUpperCase()}</h3>
+                          <div  className="d-flex">
+                            <a href={`/app/device/${x.id}`}><i class="fa fa-cog" /> </a>
 
-                            <span> <button><a href={`/app/device/${x.id}`}>S</a></button> </span>
-
-                          <div className="dropdown dropdown-action">
-                            <a
-                              className="action-icon dropdown-toggle"
-                              data-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              <i className="material-icons">more_vert</i>
-                            </a>
-                            <div className="dropdown-menu dropdown-menu-right">
+                            <div className="dropdown dropdown-action">
                               <a
-                                className="dropdown-item"
-                                data-toggle="modal"
-                                data-target=""
-                                onClick={() => pingIP(x)}
+                                className="action-icon dropdown-toggle"
+                                data-toggle="dropdown"
+                                aria-expanded="false"
                               >
-                                <i className="fa fa-pencil m-r-5" /> Test Device
+                                <i className="material-icons">more_vert</i>
                               </a>
-                              <a
-                                className="dropdown-item"
-                                data-toggle="modal"
-                                data-target="#delete_shift"
-                                onClick={() => openDelate(record)}
-                              >
-                                <i className="fa fa-trash-o m-r-5" /> Sync Device
-                              </a>
-                              <a
-                                className="dropdown-item"
-                                data-toggle="modal"
-                                data-target="#delete_shift"
-                                onClick={() => openDelate(record)}
-                              >
-                                <i className="fa fa-trash-o m-r-5" /> Clear Logs
-                              </a>
-                              <a
-                                className="dropdown-item"
-                                data-toggle="modal"
-                                data-target="#delete_shift"
-                                onClick={() => removeDevice(x)}
-                              >
-                                <i className="fa fa-trash-o m-r-5" /> Remove Device
-                              </a>
-                              <a
-                                className="dropdown-item"
-                                data-toggle="modal"
-                                data-target="#edit_shift"
-                                onClick={() => editOpen(x)}
-                              >
-                                <i className="fa fa-pencil m-r-5" /> Edit Device
-                              </a>
+                              <div className="dropdown-menu dropdown-menu-right">
+                                <a
+                                  className="dropdown-item"
+                                  data-toggle="modal"
+                                  data-target=""
+                                  onClick={() => pingIP(x)}
+                                >
+                                  <i className="fa fa-pencil m-r-5" /> Test Device
+                                </a>
+                                <a
+                                  className="dropdown-item"
+                                  data-toggle="modal"
+                                  data-target="#delete_shift"
+                                  onClick={() => openDelate(record)}
+                                >
+                                  <i className="fa fa-trash-o m-r-5" /> Sync Device
+                                </a>
+                                <a
+                                  className="dropdown-item"
+                                  data-toggle="modal"
+                                  data-target="#delete_shift"
+                                  onClick={() => openDelate(record)}
+                                >
+                                  <i className="fa fa-trash-o m-r-5" /> Clear Logs
+                                </a>
+                                <a
+                                  className="dropdown-item"
+                                  data-toggle="modal"
+                                  data-target="#delete_shift"
+                                  onClick={() => removeDevice(x)}
+                                >
+                                  <i className="fa fa-trash-o m-r-5" /> Remove Device
+                                </a>
+                                <a
+                                  className="dropdown-item"
+                                  data-toggle="modal"
+                                  data-target="#edit_shift"
+                                  onClick={() => editOpen(x)}
+                                >
+                                  <i className="fa fa-pencil m-r-5" /> Edit Device
+                                </a>
+                              </div>
                             </div>
                           </div>
                         </div>

@@ -4,52 +4,55 @@ import { Table } from "antd";
 import "antd/dist/antd.css";
 import { itemRender, onShowSizeChange } from "../paginationfunction";
 import "../antdstyle.css";
+import axios from "axios";
 
+export default function Users() {
 
-export default function Table() {
+    const [count, setCount] = useState([]);
+
+    useEffect(() => {
+        fetchUsers();
+
+    }, []);
 
 
     const columns = [
         {
-            title: "Users",
-            dataIndex: "users",
+            title: "Id",
+            dataIndex: "uid",
         },
 
         {
-            title: "Test Voice",
-            dataIndex: "test",
+            title: "Name",
+            dataIndex: "name",
         },
         {
-            title: "Live Logs",
-            dataIndex: "logs",
+            title: "Privilege",
+            dataIndex: "privilege",
         },
-    
+
     ];
-    return <div className="page-wrapper">
-        <Helmet>
-            <title>Settings - Hive HRMS</title>
-            <meta name="description" content="Login page" />
-        </Helmet>
-        {/* Page Content */}
-        <div className="content container-fluid">
-            {/* Page Header */}
-            <div className="page-header">
-                <div className="row">
-                    <div className="col">
-                        <h3 className="page-title">Settings</h3>
-                    </div>
 
-                </div>
-            </div>
-            {/* /Page Header */}
-            {/* Content Starts */}
+
+    const fetchUsers = async () => {
+        let res = await axios.get(`http://localhost:8000/devices/17208cf9-b3df-4da4-908e-df6a8ffc0c29/users`)
+        // let res = await axios.get(`http://localhost:8000/devices/${}/users`)
+        setCount(res.data)
+    }
+
+
+
+    return <div className="mt-1">
+        {/* Page Content */}
+
+        <div className="content container-fluid">
             <div className="row">
                 <div className="col-md-12">
                     <div className="table-responsive">
                         <Table
                             className="table-striped"
                             pagination={{
-                                total: 13,
+                                total: count.length,
                                 showTotal: (total, range) =>
                                     `Showing ${range[0]} to ${range[1]} of ${total} entries`,
                                 showSizeChanger: true,
@@ -60,6 +63,7 @@ export default function Table() {
                             columns={columns}
                             // bordered
                             // dataSource={data}
+                            dataSource={count}
                             rowKey={(record) => record.id}
                         // onChange={this.handleTableChange}
                         />

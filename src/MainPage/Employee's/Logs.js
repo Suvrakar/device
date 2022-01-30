@@ -6,43 +6,24 @@ import { itemRender, onShowSizeChange } from "../paginationfunction";
 import "../antdstyle.css";
 
 
-export default function Table() {
+export default function Logs() {
 
 
     const columns = [
         {
-            title: "Users",
-            dataIndex: "users",
+            title: "Log Name",
+            dataIndex: "log",
         },
 
         {
-            title: "Test Voice",
-            dataIndex: "test",
-        },
-        {
-            title: "Live Logs",
-            dataIndex: "logs",
+            title: "TimeStamp",
+            dataIndex: "time",
         },
     
     ];
-    return <div className="page-wrapper">
-        <Helmet>
-            <title>Settings - Hive HRMS</title>
-            <meta name="description" content="Login page" />
-        </Helmet>
+    return <div className="mt-5">
         {/* Page Content */}
         <div className="content container-fluid">
-            {/* Page Header */}
-            <div className="page-header">
-                <div className="row">
-                    <div className="col">
-                        <h3 className="page-title">Settings</h3>
-                    </div>
-
-                </div>
-            </div>
-            {/* /Page Header */}
-            {/* Content Starts */}
             <div className="row">
                 <div className="col-md-12">
                     <div className="table-responsive">
