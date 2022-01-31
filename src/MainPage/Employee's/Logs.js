@@ -8,19 +8,53 @@ import "../antdstyle.css";
 
 export default function Logs() {
 
+    const [log, setlog] = useState([]);
+    const [count, setcount] = useState([]);
+
+    const evt = new EventSource("http://localhost:8000/devices/17208cf9-b3df-4da4-908e-df6a8ffc0c29/stream")
+
+
+    useEffect(() => {
+        evt.onmessage = (e) => {
+            setlog(count => [...count, JSON.parse(e.data)])
+            // log.push(a)
+        }
+    }, []);
+
 
     const columns = [
         {
-            title: "Log Name",
-            dataIndex: "log",
+            title: "User Id",
+            dataIndex: "user_id",
+            key: "user_id"
+        },
+        {
+            title: "Uid",
+            dataIndex: "uid",
+            key: "uid"
+        },
+        {
+            title: "Timestamp",
+            dataIndex: "timestamp",
+            key: "timestamp"
+        },
+        {
+            title: "Punch",
+            dataIndex: "punch",
+            key: "punch"
         },
 
         {
-            title: "TimeStamp",
-            dataIndex: "time",
+            title: "Status",
+            dataIndex: "status",
+            key: "status"
         },
-    
+
+   
+     
+
     ];
+
     return <div className="mt-5">
         {/* Page Content */}
         <div className="content container-fluid">
@@ -30,7 +64,7 @@ export default function Logs() {
                         <Table
                             className="table-striped"
                             pagination={{
-                                total: 13,
+                                total: log.length,
                                 showTotal: (total, range) =>
                                     `Showing ${range[0]} to ${range[1]} of ${total} entries`,
                                 showSizeChanger: true,
@@ -40,10 +74,12 @@ export default function Logs() {
                             style={{ overflowX: "auto" }}
                             columns={columns}
                             // bordered
-                            // dataSource={data}
-                            rowKey={(record) => record.id}
+                            dataSource={log}
+                            rowKey={(record) => record.timestamp}
                         // onChange={this.handleTableChange}
                         />
+                        {console.log(log.map(x => x))}
+
                     </div>
                 </div>
             </div>

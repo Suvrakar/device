@@ -12,7 +12,10 @@ export default function Testvoice() {
   const [count, setCount] = useState([]);
 
   useEffect(() => {
-    // Checkrecord();
+    const evt = new EventSource("http://localhost:8000/devices/17208cf9-b3df-4da4-908e-df6a8ffc0c29/stream")
+    evt.onmessage = (e) => {
+      console.log(e.data)
+    }
   }, []);
 
   const Checkrecord = async (rec) => {
@@ -21,6 +24,8 @@ export default function Testvoice() {
     // let res = await axios.get(`http://localhost:8000/devices/${}/users`)
     setCount(res.data)
   }
+
+
 
 
   const dataSource = [
@@ -76,58 +81,62 @@ export default function Testvoice() {
       "testname": 'Beep bell',
       "action": "13",
     },
-    // {
-    //   "testname": 'Face not emolt',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Beep standard',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Invalid user',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Invalid time period',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": ' Invalid combination',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Illegal Access',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Disk space full',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Invalid user',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Invalid user',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Invalid user',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Invalid user',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Invalid user',
-    //   "action": "Test",
-    // },
-    // {
-    //   "testname": 'Invalid user',
-    //   "action": "Test",
-    // },
+    {
+      "testname": 'Windows(R) opening sound',
+      "action": "18",
+    },
+    {
+      "testname": 'Fingerprint not emolt',
+      "action": "20",
+    },
+    {
+      "testname": 'Password not emolt',
+      "action": "21",
+    },
+    {
+      "testname": 'Badges not emolt',
+      "action": "22",
+    },
+    {
+      "testname": 'Face not emolt',
+      "action": "23",
+    },
+    {
+      "testname": 'Beep standard',
+      "action": "24",
+    },
+    {
+      "testname": 'Invalid user',
+      "action": "30",
+    },
+    {
+      "testname": 'Invalid time period',
+      "action": "31",
+    },
+    {
+      "testname": 'Invalid combination',
+      "action": "32",
+    },
+    {
+      "testname": 'Illegal Access',
+      "action": "33",
+    },
+    {
+      "testname": 'Disk space full',
+      "action": "34",
+    },
+    {
+      "testname": 'Duplicate fingerprint',
+      "action": "35",
+    },
+    {
+      "testname": 'Fingerprint not registered',
+      "action": "36",
+    },
+    {
+      "testname": 'Focus eyes on the green box',
+      "action": "51",
+    },
   ];
 
   const columns = [
@@ -143,8 +152,8 @@ export default function Testvoice() {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <i className="fa fa-play" aria-hidden="true"></i>
-          <a onClick={() => Checkrecord(record)}>Invite</a>
+          <i onClick={() => Checkrecord(record)} className="fa fa-play" aria-hidden="true"></i>
+
           {/* {console.log(record.action)} */}
         </Space>
       )
@@ -175,7 +184,7 @@ export default function Testvoice() {
 
             // onChange={this.handleTableChange}
             />
-          
+
           </div>
         </div>
       </div>
