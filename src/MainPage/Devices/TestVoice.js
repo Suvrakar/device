@@ -26,8 +26,6 @@ export default function Testvoice() {
   }
 
 
-
-
   const dataSource = [
     {
       "testname": 'Thank You',
@@ -152,8 +150,7 @@ export default function Testvoice() {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <i onClick={() => Checkrecord(record)} className="fa fa-play" aria-hidden="true"></i>
-
+          <i onClick={() => Checkrecord(record)} style={{fontSize:"25px", cursor: "pointer" }} className="fa fa-play" aria-hidden="true"></i>
           {/* {console.log(record.action)} */}
         </Space>
       )
@@ -181,8 +178,6 @@ export default function Testvoice() {
               // dataSource={data}
               dataSource={dataSource}
               rowKey={(record) => record.action}
-
-            // onChange={this.handleTableChange}
             />
 
           </div>

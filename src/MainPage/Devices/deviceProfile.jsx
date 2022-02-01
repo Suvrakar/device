@@ -6,11 +6,10 @@ import AddDevice from './modals/addDevice';
 import { useToastify } from '../../Contexts/ToastContext';
 import { useForm, Controller } from "react-hook-form";
 import $ from "jquery";
-import SSE from "./modals/SSE"
-import SettingPage from './settingPage';
 
 
-const EmployeeProfile = () => {
+
+const DeviceProfile = () => {
 
   const { startLoading, stopLoading, successToast, errorToast } =
     useToastify();
@@ -167,8 +166,6 @@ const EmployeeProfile = () => {
         <title>{`Devices Profile - Hive HRMS`}</title>
         <meta name="description" content="Reactify Blank Page" />
       </Helmet>
-
-      {/* {console.log(employeeProfile)} */}
       {/* Page Content */}
       <div className="content container-fluid">
         {/* Page Header */}
@@ -215,7 +212,7 @@ const EmployeeProfile = () => {
                         <div className="d-flex justify-content-between">
                           <h3 className="card-title">{(x.name).toUpperCase()}</h3>
                           <div  className="d-flex">
-                            <a href={`/app/device/${x.id}`}><i class="fa fa-cog" /> </a>
+                            <a href={`/app/device/${x.id}`}><i style={{color: "#A8A7A6", fontSize:"25px"}}className="pr-2 fa fa-cog" /> </a>
 
                             <div className="dropdown dropdown-action">
                               <a
@@ -425,4 +422,4 @@ const EmployeeProfile = () => {
 
 }
 
-export default EmployeeProfile
+export default DeviceProfile

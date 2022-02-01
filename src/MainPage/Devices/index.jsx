@@ -4,28 +4,17 @@ import { withOidcSecure, OidcSecure } from '@axa-fr/react-oidc-context';
 import LoaderPage from '../loader';
 
 
-const LazyDeviceProfile = lazy(() => import('./employeeprofile.jsx'))
+const LazyDeviceProfile = lazy(() => import('./deviceprofile.jsx'))
 
 
 const EmployeesRoute1 = ({ match }) => (
    <Suspense fallback={<LoaderPage/>}>
       <Switch>
          <Redirect exact from={`${match.url}/`} to={`${match.url}/employee-dashboard`} />
-         <Route path={`${match.url}/leaves-employee`} >
-            <OidcSecure>
-               {/* <LazyLeaveEmployee /> */}
-            </OidcSecure>
-         </Route>
          <Route path={`${match.url}/employee-profile/:id?`} >
             <OidcSecure>
                <LazyDeviceProfile />
             </OidcSecure>
-         </Route>
-         <Route path={`${match.url}/my-profile`} >
-            {/* <OidcSecure>
-               <LazyDeviceProfile />
-            </OidcSecure> */}
-            <h1>hello</h1>
          </Route>
       </Switch>
    </Suspense>

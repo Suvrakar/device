@@ -56,7 +56,7 @@ export default function SettingPage({ match }) {
         <Switch>
             <Route exact path={`${match.url}/device/:id/`} >
                 <div>
-                    Nothing
+                  
                 </div>
             </Route>
             <Route exact path={`${match.url}/device/:id/users`} >

@@ -16,8 +16,6 @@ import { withOidcSecure, OidcSecure } from '@axa-fr/react-oidc-context';
 const App = (props) => {
     const { location, match, user } = props;
 
-    // $('body').addClass('account-page');
-
     useEffect(() => {
         if (location.pathname.includes("login") || location.pathname.includes("register") || location.pathname.includes("forgotpassword")
             || location.pathname.includes("otp") || location.pathname.includes("lockscreen")) {

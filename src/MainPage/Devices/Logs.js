@@ -55,7 +55,7 @@ export default function Logs() {
 
     ];
 
-    return <div className="mt-5">
+    return <div className="mt-1">
         {/* Page Content */}
         <div className="content container-fluid">
             <div className="row">

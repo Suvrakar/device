@@ -36,7 +36,7 @@ const Header = () => {
     <div className="header" style={{ right: "0px" }}>
       {/* Logo */}
       <div className="header-left">
-        <a href="/hive_hrm/app/employees/my-profile" className="logo">
+        <a href="/app/deviceprofile" className="logo">
           <img src={headerlogo} width={40} height={40} alt="" />
         </a>
       </div>
