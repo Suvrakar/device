@@ -39,7 +39,9 @@ export default function SettingPage({ match }) {
             </div>
             {/* Page Content */}
 
-            <ul className="nav nav-tabs pr-5">
+{console.log(id, "fsjdnfj")}
+
+            <ul className="nav nav-tabs pr-5" props={id}>
                 <li className="nav-item">
                     <Link className="nav-link" aria-current="page" to={`/app/device/${id}/users`}> Users </Link>
                 </li>
@@ -60,16 +62,16 @@ export default function SettingPage({ match }) {
                 </div>
             </Route>
             <Route exact path={`${match.url}/device/:id/users`} >
-                <Users />
+                <Users users={id} />
             </Route>
             <Route exact path={`${match.url}/device/:id/logs`} >
                 <div>
-                    <Logs />
+                    <Logs users={id} />
                 </div>
             </Route>
             <Route exact path={`${match.url}/device/:id/test`} >
                 <div>
-                    <Testvoice />
+                    <Testvoice users={id} />
                 </div>
             </Route>
         </Switch>

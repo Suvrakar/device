@@ -9,6 +9,7 @@ import $ from "jquery";
 
 
 
+
 const DeviceProfile = () => {
 
   const { startLoading, stopLoading, successToast, errorToast } =
@@ -40,10 +41,26 @@ const DeviceProfile = () => {
     setUserInfo(data)
   }
 
+  const editOpen = (x) => {
+    setValue("id", x.id)
+    setValue("ip", x.ip);
+    setValue("port", x.port);
+    setValue("name", x.name);
+    setValue("description", x.description);
+  };
+
+
+  const closeEdit = () => {
+    $("#add_employee").modal("hide");
+    $("#edit_shift").modal("hide");
+    setValue("ip", "");
+    setValue("port", "");
+    setValue("name", "");
+    setValue("description", "");
+  };
 
   //Update api
   const onSubmit = async (data) => {
-    console.log(data);
     startLoading()
     try {
       const payload =
@@ -52,15 +69,13 @@ const DeviceProfile = () => {
         "description": data.description
       };
       stopLoading()
+      closeEdit();
       successToast("Edited Successfully")
-      console.log(payload)
       let res = await axios.put(`http://localhost:8000/devices/${data.id}`, payload)
-      ff()
-      closeEdit()
-      console.log(res)
     }
     catch (err) {
       startLoading()
+      closeEdit();
       errorToast("Could not Edit")
       stopLoading()
     }
@@ -127,24 +142,10 @@ const DeviceProfile = () => {
     } catch (error) {
       return error;
     }
-
   }
 
 
 
-  const editOpen = (x) => {
-    setValue("id", x.id)
-    setValue("ip", x.ip);
-    setValue("port", x.port);
-    setValue("name", x.name);
-    setValue("description", x.description);
-  };
-
-
-  const closeEdit = () => {
-    $("#add_employee").modal("hide");
-    $("#edit_shift").modal("hide");
-  };
 
   const addFunction = async (data) => {
     try {
@@ -211,8 +212,8 @@ const DeviceProfile = () => {
                       <div className="card-body">
                         <div className="d-flex justify-content-between">
                           <h3 className="card-title">{(x.name).toUpperCase()}</h3>
-                          <div  className="d-flex">
-                            <a href={`/app/device/${x.id}`}><i style={{color: "#A8A7A6", fontSize:"25px"}}className="pr-2 fa fa-cog" /> </a>
+                          <div className="d-flex">
+                            <a href={`/app/device/${x.id}`}><i style={{ color: "#A8A7A6", fontSize: "25px" }} className="pr-2 fa fa-cog" /> </a>
 
                             <div className="dropdown dropdown-action">
                               <a

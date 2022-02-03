@@ -33,8 +33,6 @@ const AddDevice = ({ submitFunc }) => {
   }
 
 
-
-
   const {
     register,
     watch,
@@ -52,9 +50,17 @@ const AddDevice = ({ submitFunc }) => {
     setValue("description");
   }, []);
 
+  const closeEdit = () => {
+    setValue("ip", "");
+    setValue("port", "4370");
+    setValue("name", "");
+    setValue("description", "");
+  };
+
 
 
   const onSubmit = async (data) => {
+    closeEdit();
     submitFunc(data);
   };
 
@@ -164,8 +170,6 @@ const AddDevice = ({ submitFunc }) => {
       <div className="submit-section">
         <button className="btn btn-primary submit-btn" type="submit">Submit</button>
       </div>
-
-
     </form>
 
   )

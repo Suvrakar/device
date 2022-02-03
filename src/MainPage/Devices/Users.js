@@ -6,13 +6,13 @@ import { itemRender, onShowSizeChange } from "../paginationfunction";
 import "../antdstyle.css";
 import axios from "axios";
 
-export default function Users() {
+
+export default function Users(props) {
 
     const [count, setCount] = useState([]);
 
     useEffect(() => {
         fetchUsers();
-
     }, []);
 
 
@@ -38,12 +38,11 @@ export default function Users() {
 
 
     const fetchUsers = async () => {
-        let res = await axios.get(`http://localhost:8000/devices/17208cf9-b3df-4da4-908e-df6a8ffc0c29/users`)
-        // let res = await axios.get(`http://localhost:8000/devices/${}/users`)
+        let res = await axios.get(`http://localhost:8000/devices/${props.users}/users`)
         setCount(res.data)
     }
 
-
+    console.log(props, "fjsdfjibnsdfjinsdfj")
 
     return <div className="mt-1">
         {/* Page Content */}

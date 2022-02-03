@@ -7,24 +7,22 @@ import "../antdstyle.css";
 import axios from "axios"
 
 
-export default function Testvoice() {
+export default function Testvoice(props) {
 
   const [count, setCount] = useState([]);
 
   useEffect(() => {
-    const evt = new EventSource("http://localhost:8000/devices/17208cf9-b3df-4da4-908e-df6a8ffc0c29/stream")
-    evt.onmessage = (e) => {
-      console.log(e.data)
-    }
+ 
   }, []);
 
   const Checkrecord = async (rec) => {
     console.log(rec)
-    let res = await axios.get(`http://localhost:8000/devices/17208cf9-b3df-4da4-908e-df6a8ffc0c29/voice/${rec.action}`)
+    let res = await axios.get(`http://localhost:8000/devices/${props.users}/voice/${rec.action}`)
     // let res = await axios.get(`http://localhost:8000/devices/${}/users`)
     setCount(res.data)
   }
 
+  console.log(props.users)
 
   const dataSource = [
     {

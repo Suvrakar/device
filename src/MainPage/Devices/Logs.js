@@ -6,12 +6,12 @@ import { itemRender, onShowSizeChange } from "../paginationfunction";
 import "../antdstyle.css";
 
 
-export default function Logs() {
+export default function Logs(props) {
 
     const [log, setlog] = useState([]);
     const [count, setcount] = useState([]);
 
-    const evt = new EventSource("http://localhost:8000/devices/17208cf9-b3df-4da4-908e-df6a8ffc0c29/stream")
+    const evt = new EventSource(`http://localhost:8000/devices/${props.users}/event/stream`)
 
 
     useEffect(() => {

@@ -34,7 +34,7 @@ const App = (props) => {
             <Route path="/logout" component={LogoutPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/app" component={DefaultLayout} />
-            <Route path="/setups" component={withOidcSecure(Settinglayout)} />
+            {/* <Route path="/setups" component={withOidcSecure(Settinglayout)} /> */}
         </Switch>
     )
 }
